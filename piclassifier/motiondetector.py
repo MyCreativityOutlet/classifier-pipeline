@@ -4,7 +4,6 @@ import logging
 import time
 import numpy as np
 from ml_tools.tools import Rectangle
-from .processor import Processor
 
 
 class SlidingWindow:

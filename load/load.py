@@ -57,7 +57,7 @@ def parse_params():
 
     config = Config.load_from_file(args.config_file)
     if args.create_previews:
-        config.loader.preview = "tracking"
+        config.load.preview = "tracking"
     if args.verbose:
         config.tracking.verbose = True
 

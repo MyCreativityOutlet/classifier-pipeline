@@ -47,8 +47,8 @@ class HDF5Manager:
         # this could improve performance
         if HDF5Manager.READ_ONLY and self.mode != "r":
             raise ValueError("Only read can be done in readonly mode")
-        if not HDF5Manager.READ_ONLY:
-            self.lock.acquire()
+        #if not HDF5Manager.READ_ONLY:
+        #    self.lock.acquire()
         self.f = h5py.File(self.db, self.mode)
         return self.f
 
@@ -701,7 +701,7 @@ class TrackDatabase:
 
     def get_unique_clip_id(self):
         clip_ids = list(self.get_all_clip_ids().keys())
-        clip_ids = np.array(clip_ids).astype(np.int)
+        clip_ids = np.array(clip_ids).astype(int)
         if len(clip_ids) == 0:
             return 1
         max_clip = np.amax(clip_ids)

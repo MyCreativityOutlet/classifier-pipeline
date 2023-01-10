@@ -84,7 +84,7 @@ class ClipLoader:
         file_paths = []
         for folder_path, _, files in os.walk(root):
             for name in files:
-                if os.path.splitext(name)[1] in [".mp4", ".avi", ".cptv"]:
+                if os.path.splitext(name)[1].lower() in [".mp4", ".avi", ".cptv"]:
                     full_path = os.path.join(folder_path, name)
                     file_paths.append(full_path)
         # allows us know the order of processing
@@ -92,7 +92,7 @@ class ClipLoader:
         for file_path in file_paths:
             job_queue.put((file_path, clip_id))
             clip_id += 1
-
+        process_job(self, job_queue)
         logging.info("Processing %d", job_queue.qsize())
         for i in range(len(processes)):
             job_queue.put(("DONE", 0))
