@@ -4,12 +4,12 @@ import json
 import dateutil
 import numpy as np
 import logging
-from ml_tools import tools
-from track.region import Region
+from track_extraction.ml_tools import tools
+from track_extraction.track.region import Region
 from abc import ABC, abstractmethod
-from ml_tools.imageprocessing import resize_cv, rotate, normalize, resize_and_pad
-from ml_tools.frame import Frame, TrackChannels
-from ml_tools import imageprocessing
+from track_extraction.ml_tools.imageprocessing import resize_cv, rotate, normalize, resize_and_pad
+from track_extraction.ml_tools.frame import Frame, TrackChannels
+from track_extraction.ml_tools import imageprocessing
 import datetime
 from enum import Enum
 

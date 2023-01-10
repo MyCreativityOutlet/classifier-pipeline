@@ -21,14 +21,14 @@ import math
 import numpy as np
 from collections import namedtuple
 
-from ml_tools.tools import Rectangle
-from track.region import Region
-from kalman.kalman import Kalman
-from ml_tools.tools import eucl_distance
-from ml_tools.datasetstructures import get_segments, SegmentHeader, SegmentType
+from track_extraction.ml_tools.tools import Rectangle
+from track_extraction.track.region import Region
+from track_extraction.kalman.kalman import Kalman
+from track_extraction.ml_tools.tools import eucl_distance
+from track_extraction.ml_tools.datasetstructures import get_segments, SegmentHeader, SegmentType
 import cv2
 import logging
-from track.tracker import Tracker
+from track_extraction.track.tracker import Tracker
 
 
 class RegionTracker(Tracker):

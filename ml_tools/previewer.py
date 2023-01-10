@@ -24,14 +24,14 @@ import numpy as np
 import cv2
 from PIL import Image, ImageDraw, ImageFont
 
-from load.clip import Clip
-from ml_tools import tools
-from ml_tools.tools import Rectangle
-import ml_tools.globals as globs
-from ml_tools.mpeg_creator import MPEGCreator
+from track_extraction.load.clip import Clip
+from track_extraction.ml_tools import tools
+from track_extraction.ml_tools.tools import Rectangle
+import track_extraction.ml_tools.globals as globs
+from track_extraction.ml_tools.mpeg_creator import MPEGCreator
 
 # from track.region import Region
-from ml_tools.imageprocessing import normalize
+from track_extraction.ml_tools.imageprocessing import normalize
 
 
 class Previewer:

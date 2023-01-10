@@ -17,8 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import ml_tools.tools as tools
-from ml_tools.tools import Rectangle
+import track_extraction.ml_tools.tools as tools
+from track_extraction.ml_tools.tools import Rectangle
 import attr
 import logging
 import numpy as np

@@ -22,9 +22,9 @@ import os.path as path
 import attr
 import logging
 
-from config import config
+from track_extraction.config import config
 from .defaultconfig import DefaultConfig
-from ml_tools.previewer import Previewer
+from track_extraction.ml_tools.previewer import Previewer
 
 
 @attr.s

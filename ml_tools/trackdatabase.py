@@ -18,7 +18,7 @@ import json
 from dateutil.parser import parse as parse_date
 
 import numpy as np
-from track.region import Region
+from track_extraction.track.region import Region
 
 special_datasets = [
     "tag_frames",

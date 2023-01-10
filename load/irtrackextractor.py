@@ -29,18 +29,18 @@ from cptv import CPTVReader
 import cv2
 
 from .clip import Clip
-from ml_tools.tools import Rectangle
-from track.region import Region
-from track.track import Track
-from piclassifier.motiondetector import is_affected_by_ffc
-from ml_tools.imageprocessing import (
+from track_extraction.ml_tools.tools import Rectangle
+from track_extraction.track.region import Region
+from track_extraction.track.track import Track
+from track_extraction.piclassifier.motiondetector import is_affected_by_ffc
+from track_extraction.ml_tools.imageprocessing import (
     detect_objects,
     normalize,
     detect_objects_ir,
     theshold_saliency,
     detect_objects_both,
 )
-from track.cliptracker import ClipTracker
+from track_extraction.track.cliptracker import ClipTracker
 
 DO_SALIENCY = True
 

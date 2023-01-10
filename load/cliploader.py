@@ -22,15 +22,15 @@ import logging
 import time
 from multiprocessing import Process, Queue
 import traceback
-from ml_tools import tools
+from track_extraction.ml_tools import tools
 
-from ml_tools.previewer import Previewer
-from ml_tools.trackdatabase import TrackDatabase
+from track_extraction.ml_tools.previewer import Previewer
+from track_extraction.ml_tools.trackdatabase import TrackDatabase
 from .clip import Clip
 from .irtrackextractor import IRTrackExtractor
 from .cliptrackextractor import ClipTrackExtractor
-from ml_tools.imageprocessing import clear_frame
-from track.track import Track
+from track_extraction.ml_tools.imageprocessing import clear_frame
+from track_extraction.track.track import Track
 import numpy as np
 import json
 

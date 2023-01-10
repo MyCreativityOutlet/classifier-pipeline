@@ -5,9 +5,9 @@ import math
 import cv2
 import numpy as np
 
-from track.track import Track
-from track.region import Region
-from ml_tools.imageprocessing import detect_objects, normalize
+from track_extraction.track.track import Track
+from track_extraction.track.region import Region
+from track_extraction.ml_tools.imageprocessing import detect_objects, normalize
 
 
 class ClipTracker(ABC):

@@ -6,8 +6,8 @@ import argparse
 import cv2
 import os
 
-from ml_tools.logs import init_logging
-from config.config import Config
+from track_extraction.ml_tools.logs import init_logging
+from track_extraction.config.config import Config
 from .cliploader import ClipLoader
 
 
