@@ -143,11 +143,14 @@ class IRTrackExtractor(ClipTracker):
         _, ext = os.path.splitext(clip.source_file)
         count = 0
         background = None
+        max_frames = 100
+        frames = 0
         vidcap = cv2.VideoCapture(clip.source_file)
         while True:
             success, image = vidcap.read()
-            if not success:
+            if not success or frames >= max_frames:
                 break
+            frames += 1
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             if clip.current_frame == -1:
                 background = np.uint32(gray)

@@ -215,14 +215,14 @@ class ClipLoader:
                 self.config.load.cache_to_disk,
                 high_quality_optical_flow=self.config.load.high_quality_optical_flow,
                 verbose=self.config.verbose,
-                do_tracking=False,
+                do_tracking=True,
             )
         else:
             track_extractor = IRTrackExtractor(
                 self.config.tracking,
                 self.config.load.cache_to_disk,
                 verbose=self.config.verbose,
-                do_tracking=False,
+                do_tracking=True,
             )
         return track_extractor
 
@@ -260,14 +260,14 @@ class ClipLoader:
             metadata, track_extractor.config.min_tag_confidence
         )
 
-        if not valid_tracks or len(valid_tracks) == 0:
+        """if not valid_tracks or len(valid_tracks) == 0:
             logging.error("No valid track data found for %s", filename)
-            return
+            return"""
         clip = Clip(track_extractor.config, filename)
-        clip.load_metadata(
+        """clip.load_metadata(
             metadata,
             self.config.load.tag_precedence,
-        )
+        )"""
         tracker_version = metadata.get("tracker_version", 0)
         process_background = tracker_version < 10
         logging.debug(

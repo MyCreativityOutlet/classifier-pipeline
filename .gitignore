@@ -106,3 +106,5 @@ models
 classifier.yaml
 test
 /tracks/dataset.hdf5
+*.mp4
+*.MP4

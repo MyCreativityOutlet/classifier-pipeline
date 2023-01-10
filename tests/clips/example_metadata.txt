@@ -1,0 +1,26 @@
+{
+    "id": 1,
+    "deviceId": 1132,
+    "duration": 17.8888888888889,
+    "location": {
+        "lat": -43.63730239868164,
+        "lng": 172.49111938476562
+    },
+    "rawMimeType": "video/mp4",
+    "deviceName": "ospri13",
+    "groupId": 33,
+    "groupName": "ospri",
+    "processing": true,
+    "processingState": "",
+    "recordingDateTime": "2022-07-05T10:36:23.109000+00:00",
+    "stationId": 238,
+    "stationName": "New station for ospri06_2019-09-29T09:01:41.715Z",
+    "type": "thermalRaw",
+    "tags": [],
+    "tracks": [],
+    "additionalMetadata": "",
+    "Tracks": [],
+    "tracker_version": 10,
+    "models": [],
+    "thumbnail_region": {}
+}
