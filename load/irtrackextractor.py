@@ -135,7 +135,7 @@ class IRTrackExtractor(ClipTracker):
             self.cache_to_disk,
             False,
             self.keep_frames,
-            max_frames=None
+            max_frames=100
             if self.keep_frames
             else 51,  # enough to cover back comparison
         )

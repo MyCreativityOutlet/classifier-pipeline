@@ -236,7 +236,7 @@ class ClipLoader:
 
         destination_folder = self._get_dest_folder(base_filename)
         # delete any previous files
-        tools.purge(destination_folder, base_filename + "*.mp4")
+        # tools.purge(destination_folder, base_filename + "*.mp4")
 
         # read metadata
         metadata_filename = os.path.join(

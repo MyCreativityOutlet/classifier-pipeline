@@ -75,7 +75,13 @@ def load_clips(config, args):
 
         loader.process_file(target, clip_id)
     else:
-        loader.process_all(target)
+        for folder_path, _, files in os.walk(target):
+            for name in files:
+                if os.path.splitext(name)[1].lower() in [".mp4", ".avi", ".cptv"]:
+                    full_path = os.path.join(folder_path, name)
+                    clip_id = loader.database.get_unique_clip_id()
+                    loader.process_file(full_path, clip_id)
+        # loader.process_all(target)
 
 
 def print_opencl_info():
