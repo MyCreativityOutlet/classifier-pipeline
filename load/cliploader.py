@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import os
 import logging
 import time
-from multiprocessing import Process, Queue
+from multiprocessing import Process, Queue, cpu_count
 import traceback
 from track_extraction.ml_tools import tools
 
@@ -71,7 +71,7 @@ class ClipLoader:
         clip_id = self.database.get_unique_clip_id()
         job_queue = Queue()
         processes = []
-        for i in range(max(1, self.workers_threads)):
+        for i in range(max(1, cpu_count() - 1)):
             p = Process(
                 target=process_job,
                 args=(self, job_queue),
