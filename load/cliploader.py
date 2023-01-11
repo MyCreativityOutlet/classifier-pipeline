@@ -45,8 +45,7 @@ def process_job(loader, queue):
                 break
             else:
                 loader.process_file(str(filename), clip_id)
-            if i % 50 == 0:
-                logging.info("%s jobs left", queue.qsize())
+            logging.info("%s jobs left", queue.qsize())
         except Exception as e:
             logging.error("Process_job error %s %s", filename, e)
             traceback.print_exc()
@@ -92,7 +91,7 @@ class ClipLoader:
         for file_path in file_paths:
             job_queue.put((file_path, clip_id))
             clip_id += 1
-        process_job(self, job_queue)
+        # process_job(self, job_queue)
         logging.info("Processing %d", job_queue.qsize())
         for i in range(len(processes)):
             job_queue.put(("DONE", 0))
