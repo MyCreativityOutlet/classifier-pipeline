@@ -262,7 +262,7 @@ class ClipLoader:
         """if not valid_tracks or len(valid_tracks) == 0:
             logging.error("No valid track data found for %s", filename)
             return"""
-        clip = Clip(track_extractor.config, filename)
+        clip = Clip(track_extractor.config, filename, clip_id=clip_id)
         """clip.load_metadata(
             metadata,
             self.config.load.tag_precedence,

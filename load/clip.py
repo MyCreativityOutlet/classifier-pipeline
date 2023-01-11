@@ -53,9 +53,14 @@ class Clip:
         calc_stats=True,
         model=None,
         type="thermal",
+        clip_id=None,
     ):
-        self._id = Clip.CLIP_ID
-        Clip.CLIP_ID += 1
+        if clip_id is None:
+            self._id = Clip.CLIP_ID
+            Clip.CLIP_ID += 1
+        else:
+            self._id = clip_id
+            Clip.CLIP_ID = clip_id + 1
         Track._track_id = 1
         self.disable_background_subtraction = False
         self.current_frame = -1
