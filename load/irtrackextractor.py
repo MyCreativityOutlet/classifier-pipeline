@@ -27,6 +27,8 @@ from datetime import datetime
 
 from cptv import CPTVReader
 import cv2
+from torch.nn.functional import interpolate
+from torch import tensor
 
 from .clip import Clip
 from track_extraction.ml_tools.tools import Rectangle
@@ -135,7 +137,7 @@ class IRTrackExtractor(ClipTracker):
             self.cache_to_disk,
             False,
             self.keep_frames,
-            max_frames=100
+            max_frames=None
             if self.keep_frames
             else 51,  # enough to cover back comparison
         )
@@ -146,12 +148,29 @@ class IRTrackExtractor(ClipTracker):
         max_frames = 100
         frames = 0
         vidcap = cv2.VideoCapture(clip.source_file)
+        fps = vidcap.get(cv2.CAP_PROP_FPS)
+        width = vidcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        height = vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        reduce_frame_size = False
+        if width >= 600 and height >= 600:
+            reduce_frame_size = True
+            reduce_factor = min(height / 600, width / 600)
+        process_freq = (fps // 9) + 1
+        process = 0
         while True:
             success, image = vidcap.read()
             if not success or frames >= max_frames:
                 break
+            if process % process_freq != 0:
+                process += 1
+                continue
+            process += 1
             frames += 1
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            if reduce_frame_size:
+                gray_tensor = tensor(gray).reshape(1, 1, *gray.shape)
+                gray = interpolate(gray_tensor, scale_factor=1/reduce_factor, mode="nearest-exact")
+                gray = gray.reshape(*gray.shape[-2:]).numpy()
             if clip.current_frame == -1:
                 background = np.uint32(gray)
                 self.init_saliency(gray.shape[1], gray.shape[0])
