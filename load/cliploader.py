@@ -91,6 +91,7 @@ class ClipLoader:
         for file_path in file_paths:
             job_queue.put((file_path, clip_id))
             clip_id += 1
+        # job_queue.put(("DONE", 0))
         # process_job(self, job_queue)
         logging.info("Processing %d", job_queue.qsize())
         for i in range(len(processes)):
