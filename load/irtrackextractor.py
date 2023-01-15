@@ -29,7 +29,7 @@ from cptv import CPTVReader
 import cv2
 from torch.nn.functional import interpolate
 from torch import tensor
-
+from math import ceil
 from .clip import Clip
 from track_extraction.ml_tools.tools import Rectangle
 from track_extraction.track.region import Region
@@ -155,7 +155,7 @@ class IRTrackExtractor(ClipTracker):
         if width >= 600 and height >= 600:
             reduce_frame_size = True
             reduce_factor = min(height / 600, width / 600)
-        process_freq = (fps // 9) + 1
+        process_freq = ceil(fps / 9)
         process = 0
         while True:
             success, image = vidcap.read()
