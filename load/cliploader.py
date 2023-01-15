@@ -71,7 +71,7 @@ class ClipLoader:
         clip_id = self.database.get_unique_clip_id()
         job_queue = Queue()
         processes = []
-        for i in range(max(1, cpu_count() - 1)):
+        for i in range(max(1, cpu_count())):
             p = Process(
                 target=process_job,
                 args=(self, job_queue),
