@@ -7,8 +7,11 @@ Date December 2017
 Handles reading and writing tracks (or segments) to a large database.  Uses HDF5 as a backing store.
 
 """
+import time
+
 import h5py
 import os
+from time import sleep
 import logging
 import filelock
 from .frame import Frame, TrackChannels
@@ -29,14 +32,14 @@ special_datasets = [
 class HDF5Manager:
     """Class to handle locking of HDF5 files."""
 
-    LOCK_FILE = "/var/lock/classifier-hdf5.lock"
+    LOCK_FILE = "tests/dataset.hdf5.lock"
     READ_ONLY = False
 
     def __init__(self, db, mode="r"):
         self.mode = mode
         self.f = None
         self.db = db
-        self.lock = filelock.FileLock(HDF5Manager.LOCK_FILE, timeout=60 * 3)
+        self.lock = filelock.FileLock(HDF5Manager.LOCK_FILE, timeout=30)
         filelock.logger().setLevel(logging.ERROR)
 
     def __enter__(self):
@@ -44,8 +47,8 @@ class HDF5Manager:
         # this could improve performance
         if HDF5Manager.READ_ONLY and self.mode != "r":
             raise ValueError("Only read can be done in readonly mode")
-        #if not HDF5Manager.READ_ONLY:
-        #    self.lock.acquire()
+        if not HDF5Manager.READ_ONLY:
+            self.lock.acquire()
         self.f = h5py.File(self.db, self.mode)
         return self.f
 
