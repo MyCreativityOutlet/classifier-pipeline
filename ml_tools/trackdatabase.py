@@ -11,12 +11,9 @@ import h5py
 import os
 import logging
 import filelock
-import numpy as np
-from dateutil.parser import parse as parse_date
 from .frame import Frame, TrackChannels
 import json
 from dateutil.parser import parse as parse_date
-
 import numpy as np
 from track_extraction.track.region import Region
 

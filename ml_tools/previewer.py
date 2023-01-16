@@ -21,7 +21,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import logging
 from os import path
 import numpy as np
-import cv2
 from PIL import Image, ImageDraw, ImageFont
 
 from track_extraction.load.clip import Clip

@@ -16,33 +16,22 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
-import matplotlib.pyplot as plt
 
-import os
 import logging
-import numpy as np
+import os
 import time
-import yaml
 from datetime import datetime
-
-from cptv import CPTVReader
-import cv2
-from torch.nn.functional import interpolate
-from torch import tensor
 from math import ceil
-from .clip import Clip
-from track_extraction.ml_tools.tools import Rectangle
-from track_extraction.track.region import Region
-from track_extraction.track.track import Track
-from track_extraction.piclassifier.motiondetector import is_affected_by_ffc
+import cv2
+import numpy as np
+from torch import tensor
+from torch.nn.functional import interpolate
 from track_extraction.ml_tools.imageprocessing import (
-    detect_objects,
     normalize,
-    detect_objects_ir,
     theshold_saliency,
-    detect_objects_both,
 )
 from track_extraction.track.cliptracker import ClipTracker
+from track_extraction.track.region import Region
 
 DO_SALIENCY = True
 
@@ -143,8 +132,6 @@ class IRTrackExtractor(ClipTracker):
         )
 
         _, ext = os.path.splitext(clip.source_file)
-        count = 0
-        background = None
         max_frames = 100
         frames = 0
         vidcap = cv2.VideoCapture(clip.source_file)
@@ -296,8 +283,6 @@ class IRTrackExtractor(ClipTracker):
         return rectangles
 
     def _process_frame(self, clip, thermal, ffc_affected=False):
-
-        wait = 1
         """
         Tracks objects through frame
         :param thermal: A numpy array of shape (height, width) and type uint16
@@ -328,9 +313,6 @@ class IRTrackExtractor(ClipTracker):
         )
         threshold = 0
         if np.amin(saliencyMap) == 255:
-            num = 0
-            mask = saliencyMap.copy()
-            component_details = []
             saliencyMap[:] = 0
         else:
             backsub = np.where(saliencyMap > 0, saliencyMap, backsub)
@@ -340,9 +322,6 @@ class IRTrackExtractor(ClipTracker):
         clip.set_background(self.background.background)
         if not self.do_tracking:
             return
-
-        # else:
-
         num, mask, component_details = theshold_saliency(backsub, threshold=0)
         component_details = component_details[1:]
         component_details = self.merge_components(component_details)

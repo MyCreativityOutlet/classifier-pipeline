@@ -23,7 +23,6 @@ import time
 from multiprocessing import Process, Queue, cpu_count
 import traceback
 from track_extraction.ml_tools import tools
-
 from track_extraction.ml_tools.previewer import Previewer
 from track_extraction.ml_tools.trackdatabase import TrackDatabase
 from .clip import Clip
@@ -64,7 +63,7 @@ class ClipLoader:
             tools.gzip_compression if self.config.load.enable_compression else None
         )
         # number of threads to use when processing jobs.
-        self.workers_threads = config.worker_threads
+        # self.workers_threads = config.worker_threads
         self.previewer = Previewer.create_if_required(config, config.load.preview)
 
     def process_all(self, root):
@@ -256,18 +255,8 @@ class ClipLoader:
         if not self.reprocess and self.database.has_clip(str(metadata["id"])):
             logging.warning("Already loaded %s", filename)
             return
-        valid_tracks = self._filter_clip_tracks(
-            metadata, track_extractor.config.min_tag_confidence
-        )
 
-        """if not valid_tracks or len(valid_tracks) == 0:
-            logging.error("No valid track data found for %s", filename)
-            return"""
         clip = Clip(track_extractor.config, filename, clip_id=clip_id)
-        """clip.load_metadata(
-            metadata,
-            self.config.load.tag_precedence,
-        )"""
         tracker_version = metadata.get("tracker_version", 0)
         process_background = tracker_version < 10
         logging.debug(

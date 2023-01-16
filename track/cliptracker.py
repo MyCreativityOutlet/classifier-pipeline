@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 import logging
-import time
 import math
 import cv2
 import numpy as np
 
+from track_extraction.ml_tools.tools import Rectangle
 from track_extraction.track.track import Track
 from track_extraction.track.region import Region
-from track_extraction.ml_tools.imageprocessing import detect_objects, normalize
+from track_extraction.ml_tools.imageprocessing import normalize
 
 
 class ClipTracker(ABC):

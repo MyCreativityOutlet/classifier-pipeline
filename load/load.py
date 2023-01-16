@@ -5,7 +5,6 @@ Processes a CPTV file identifying and tracking regions of interest, and saving t
 import argparse
 import cv2
 import os
-
 from track_extraction.ml_tools.logs import init_logging
 from track_extraction.config.config import Config
 from .cliploader import ClipLoader
