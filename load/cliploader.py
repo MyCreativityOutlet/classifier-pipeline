@@ -120,11 +120,11 @@ class ClipLoader:
             start_time, end_time = clip.start_and_end_time_absolute(
                 track.start_s, track.end_s
             )
-            original_thermal = []
+            # original_thermal = []
             cropped_data = []
             for region in track.bounds_history:
                 frame = clip.frame_buffer.get_frame(region.frame_number)
-                original_thermal.append(frame.thermal)
+                # original_thermal.append(frame.thermal)
                 cropped = frame.crop_by_region(region)
                 # zero out the filtered channel
                 if not self.config.load.include_filtered_channel:
@@ -144,7 +144,7 @@ class ClipLoader:
                     cropped_data,
                     sample_frames=sample_frames,
                     opts=self.compression,
-                    original_thermal=original_thermal,
+                    original_thermal=None,
                     start_time=start_time,
                     end_time=end_time,
                 )
