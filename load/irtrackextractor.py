@@ -132,17 +132,18 @@ class IRTrackExtractor(ClipTracker):
         )
 
         _, ext = os.path.splitext(clip.source_file)
-        max_frames = 100
+        max_frames = 1000
         frames = 0
         vidcap = cv2.VideoCapture(clip.source_file)
         fps = vidcap.get(cv2.CAP_PROP_FPS)
         width = vidcap.get(cv2.CAP_PROP_FRAME_WIDTH)
         height = vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         reduce_frame_size = False
-        if width >= 600 and height >= 600:
+        """if width >= 600 and height >= 600:
             reduce_frame_size = True
-            reduce_factor = min(height / 600, width / 600)
+            reduce_factor = min(height / 600, width / 600)"""
         process_freq = ceil(fps / 9)
+        process_freq = 1
         process = 0
         while True:
             success, image = vidcap.read()
@@ -154,10 +155,10 @@ class IRTrackExtractor(ClipTracker):
             process += 1
             frames += 1
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            if reduce_frame_size:
+            """if reduce_frame_size:
                 gray_tensor = tensor(gray).reshape(1, 1, *gray.shape)
                 gray = interpolate(gray_tensor, scale_factor=1/reduce_factor, mode="nearest-exact")
-                gray = gray.reshape(*gray.shape[-2:]).numpy()
+                gray = gray.reshape(*gray.shape[-2:]).numpy()"""
             if clip.current_frame == -1:
                 background = np.uint32(gray)
                 self.init_saliency(gray.shape[1], gray.shape[0])
