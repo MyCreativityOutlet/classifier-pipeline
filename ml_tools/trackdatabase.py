@@ -40,6 +40,7 @@ class HDF5Manager:
         self.f = None
         self.db = db
         self.lock = filelock.FileLock(HDF5Manager.LOCK_FILE, timeout=30)
+        logging.getLogger("filelock").setLevel(logging.INFO)
         # filelock.logger().setLevel(logging.ERROR)
 
     def __enter__(self):
