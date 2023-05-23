@@ -116,7 +116,7 @@ class IRTrackExtractor(ClipTracker):
 
     def parse_clip(self, clip, process_background=False):
         """
-        Loads a cptv file, and prepares for track extraction.
+        Loads a mp4 file, and prepares for track extraction.
         """
         clip.type = self.type
         self._tracking_time = None
