@@ -239,7 +239,7 @@ class ClipLoader:
 
         # read metadata
         metadata_filename = os.path.join(
-            os.path.dirname(filename), base_filename + ".txt"
+            os.path.dirname(filename), "settings.txt"
         )
 
         if not os.path.isfile(metadata_filename):
